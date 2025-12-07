@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playwright Hub Mock</title>
+    <style>
+      :root {
+        --bg: #020617;
+        --surface: rgba(15, 23, 42, 0.7);
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --border: #1e293b;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", system-ui;
+        margin: 0;
+        padding: 32px;
+      }
+      .surface {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: var(--surface);
+        padding: 20px;
+        margin-bottom: 24px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .stat-card {
+        background: rgba(2, 6, 23, 0.7);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .filters,
+      .saved-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+      .pill {
+        border: 1px solid var(--border);
+        padding: 6px 14px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+      }
+      .pill.active {
+        background: #e2e8f0;
+        color: #0f172a;
+        border-color: #e2e8f0;
+      }
+      .chart-placeholder {
+        border: 1px dashed rgba(148, 163, 184, 0.3);
+        border-radius: 16px;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 16px;
+      }
+      th,
+      td {
+        padding: 8px 4px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        font-size: 13px;
+      }
+      th {
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .badge {
+        border: 1px solid #34d399;
+        color: #34d399;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 11px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="surface">
+      <h1>E2E Automation Dashboard</h1>
+      <p>Mock view showcasing KPI cards, charts, histograms, saved filters, failure hotspots, artifact viewer, and generated test cases.</p>
+      <div class="row">
+        <div class="stat-card">
+          <p style="color: var(--muted); font-size: 11px">Total Runs</p>
+          <strong style="font-size: 28px">42</strong>
+        </div>
+        <div class="stat-card">
+          <p style="color: var(--muted); font-size: 11px">Pass Rate</p>
+          <strong style="font-size: 28px; color: #34d399">86%</strong>
+        </div>
+        <div class="stat-card">
+          <p style="color: var(--muted); font-size: 11px">Avg Duration</p>
+          <strong style="font-size: 24px">3m 07s</strong>
+        </div>
+        <div class="stat-card">
+          <p style="color: var(--muted); font-size: 11px">Avg Coverage</p>
+          <strong style="font-size: 24px">87.4%</strong>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 16px">
+        <div>
+          <p style="color: var(--muted); font-size: 11px">Run Timeline</p>
+          <div class="chart-placeholder">Line chart (coverage & duration)</div>
+        </div>
+        <div>
+          <p style="color: var(--muted); font-size: 11px">Coverage Distribution</p>
+          <div class="chart-placeholder">Histogram (bands 0-49…95-100)</div>
+        </div>
+        <div>
+          <p style="color: var(--muted); font-size: 11px">Duration Distribution</p>
+          <div class="chart-placeholder">Histogram (<1m, 1-3m…)</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="surface">
+      <div class="filters">
+        <div class="pill active">All</div>
+        <div class="pill">Passed</div>
+        <div class="pill">Failed</div>
+        <div class="pill">Unstable</div>
+        <input placeholder="Filter env" style="background: rgba(2,6,23,0.7); border:1px solid var(--border); border-radius:16px; color:var(--text); padding:8px 12px" />
+        <input placeholder="Filter suite" style="background: rgba(2,6,23,0.7); border:1px solid var(--border); border-radius:16px; color:var(--text); padding:8px 12px" />
+        <div class="pill">Save filter</div>
+      </div>
+      <div class="saved-filters" style="margin-top: 12px">
+        <div class="pill">CI Default ×</div>
+        <div class="pill">Regression Only ×</div>
+      </div>
+    </section>
+
+    <section class="surface">
+      <header style="display: flex; justify-content: space-between; align-items: center">
+        <div>
+          <p style="text-transform: uppercase; font-size: 11px; color: var(--muted)">Application</p>
+          <h2><a href="#" style="color: var(--text)">call-centre-frontend</a></h2>
+        </div>
+        <span class="badge">Latest run Passed</span>
+      </header>
+      <div class="row" style="margin: 16px 0 24px">
+        <div>
+          <p style="color: var(--muted); font-size: 11px">Suite</p>
+          <strong>dashboard-e2e</strong>
+        </div>
+        <div>
+          <p style="color: var(--muted); font-size: 11px">Duration</p>
+          <strong>3m 12s</strong>
+        </div>
+        <div>
+          <p style="color: var(--muted); font-size: 11px">Coverage</p>
+          <strong>87.2%</strong>
+        </div>
+        <div>
+          <p style="color: var(--muted); font-size: 11px">Recent Trend</p>
+          <div class="chart-placeholder" style="height: 80px">Mini sparkline</div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Started</th>
+            <th>Suite</th>
+            <th>Env</th>
+            <th>Totals</th>
+            <th>Duration</th>
+            <th>Coverage</th>
+            <th>Commit</th>
+            <th>Artifact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2024-11-16 10:12</td>
+            <td>dashboard-e2e</td>
+            <td>ci</td>
+            <td><span style="color: #34d399">12</span>/12</td>
+            <td>3m 12s</td>
+            <td>87.2%</td>
+            <td>bd0a9dd</td>
+            <td><a href="#">report</a></td>
+          </tr>
+          <tr>
+            <td>2024-11-15 18:43</td>
+            <td>dashboard-e2e</td>
+            <td>ci</td>
+            <td><span style="color: #34d399">12</span>/12</td>
+            <td>3m 05s</td>
+            <td>88.1%</td>
+            <td>af87c2d</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="surface">
+      <h3>Failure Hotspots</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Application</th>
+            <th>Suite</th>
+            <th>Failures</th>
+            <th>Flaky</th>
+            <th>Pass Rate</th>
+            <th>Avg Duration</th>
+            <th>Last Run</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>call-centre-frontend</td>
+            <td>smoke-checks</td>
+            <td style="color: #f87171">3</td>
+            <td style="color: #facc15">2</td>
+            <td>72%</td>
+            <td>4m 20s</td>
+            <td>2024-11-15 21:10</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="surface">
+      <h3>Artifact Viewer + Generated Test Cases</h3>
+      <div class="row">
+        <div class="stat-card">
+          <p style="color: var(--muted); font-size: 11px">Artifact List</p>
+          <p>Sidebar with run metadata and preview.</p>
+        </div>
+        <div class="stat-card">
+          <p style="color: var(--muted); font-size: 11px">Generated Test Cases</p>
+          <ul>
+            <li>Handle failed login scenario (recent failure)</li>
+            <li>Explore optimistic UI edge cases</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "getting-started",
+    "title": "Getting Started",
+    "roles": ["viewer", "editor", "admin"]
+  },
+  {
+    "slug": "theme",
+    "title": "Theme Customization",
+    "roles": ["viewer", "editor", "admin"]
+  },
+  {
+    "slug": "dev-guide",
+    "title": "Developer Guide",
+    "roles": ["dev", "editor", "admin"]
+  }
+]

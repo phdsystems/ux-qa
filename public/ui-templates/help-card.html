@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Help Card Template</title>
+    <link rel="stylesheet" href="../globals.css" />
+    <style>
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", system-ui;
+        margin: 0;
+        padding: 32px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--surface);
+        padding: 20px;
+      }
+      .pill {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-size: 11px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="card">
+      <p style="text-transform: uppercase; font-size: 11px; color: var(--muted)">Help & Integration</p>
+      <p>
+        Drop this component anywhere to explain how to integrate with Playwright Hub. Link to `/api/runs`, `/api/events`, and
+        external docs as needed.
+      </p>
+      <div style="display: flex; gap: 12px">
+        <span class="pill">Test API</span>
+        <span class="pill">Stream events</span>
+        <span class="pill">Read docs</span>
+      </div>
+    </section>
+  </body>
+</html>
