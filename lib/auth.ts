@@ -14,11 +14,11 @@ export function ensureAuthorized(source: Request | Headers) {
   if (!apiKey) {
     return { status: AUTH_OK };
   }
-  const headerKey = getHeader(source, "x-playwright-hub-key");
+  const headerKey = getHeader(source, "x-uxqa-key");
   if (headerKey !== apiKey) {
     return { status: AUTH_FORBIDDEN };
   }
-  const role = getHeader(source, "x-playwright-hub-role");
+  const role = getHeader(source, "x-uxqa-role");
   return { status: AUTH_OK, role };
 }
 

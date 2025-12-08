@@ -1,0 +1,48 @@
+{
+  "name": "@ux.qa/reporter",
+  "version": "0.1.0",
+  "description": "Playwright reporter for UX.QA dashboard - publish test results automatically",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "bun test",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "playwright",
+    "reporter",
+    "testing",
+    "e2e",
+    "ux.qa",
+    "test-results",
+    "dashboard"
+  ],
+  "author": "Adentic",
+  "license": "MIT",
+  "peerDependencies": {
+    "@playwright/test": ">=1.40.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adentic/ux.qa.git",
+    "directory": "packages/reporter"
+  }
+}

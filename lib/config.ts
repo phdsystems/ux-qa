@@ -2,7 +2,7 @@ import path from "node:path";
 
 type TelemetryDriver = "prometheus" | "influx" | "both" | "none";
 
-const telemetryEnv = (process.env.PLAYWRIGHT_HUB_TELEMETRY ?? "prometheus").toLowerCase();
+const telemetryEnv = (process.env.UXQA_TELEMETRY ?? "prometheus").toLowerCase();
 const resolvedTelemetry: TelemetryDriver = ["prometheus", "influx", "both", "none"].includes(
   telemetryEnv as TelemetryDriver
 )
@@ -31,21 +31,21 @@ const influxHasConfig = Boolean(
 export const influxEnabled =
   (telemetryDriver === "influx" || telemetryDriver === "both") && influxHasConfig;
 
-export const storageDriver = process.env.PLAYWRIGHT_HUB_STORAGE ?? "memory";
-export const maxRuns = Number(process.env.PLAYWRIGHT_HUB_MAX_RUNS ?? "200");
-const defaultDataFile = path.join(process.cwd(), "playwright-hub-data", "runs.json");
-export const dataFilePath = process.env.PLAYWRIGHT_HUB_DATA_FILE ?? defaultDataFile;
+export const storageDriver = process.env.UXQA_STORAGE ?? "memory";
+export const maxRuns = Number(process.env.UXQA_MAX_RUNS ?? "200");
+const defaultDataFile = path.join(process.cwd(), "uiqa-data", "runs.json");
+export const dataFilePath = process.env.UXQA_DATA_FILE ?? defaultDataFile;
 
 export const alertWebhookUrl = process.env.ALERT_WEBHOOK_URL;
 export const alertCoverageThreshold = Number(process.env.ALERT_COVERAGE_THRESHOLD ?? "0");
 
-export const apiKey = process.env.PLAYWRIGHT_HUB_API_KEY;
+export const apiKey = process.env.UXQA_API_KEY;
 
-const defaultSettingsFile = path.join(process.cwd(), "playwright-hub-data", "settings.json");
-export const settingsFilePath = process.env.PLAYWRIGHT_HUB_SETTINGS_FILE ?? defaultSettingsFile;
+const defaultSettingsFile = path.join(process.cwd(), "uiqa-data", "settings.json");
+export const settingsFilePath = process.env.UXQA_SETTINGS_FILE ?? defaultSettingsFile;
 
-export const rbacMap = process.env.PLAYWRIGHT_HUB_RBAC
-  ? process.env.PLAYWRIGHT_HUB_RBAC.split(",").reduce<Record<string, string[]>>((acc, entry) => {
+export const rbacMap = process.env.UXQA_RBAC
+  ? process.env.UXQA_RBAC.split(",").reduce<Record<string, string[]>>((acc, entry) => {
       const [key, roles] = entry.split(":");
       if (!key || !roles) {
         return acc;
@@ -56,7 +56,7 @@ export const rbacMap = process.env.PLAYWRIGHT_HUB_RBAC
   : null;
 
 export const testCasePrompt =
-  process.env.PLAYWRIGHT_HUB_TESTCASE_PROMPT ?? "Generate Playwright test ideas for {{appId}} and suite {{suite}}.";
+  process.env.UXQA_TESTCASE_PROMPT ?? "Generate Playwright test ideas for {{appId}} and suite {{suite}}.";
 
 export const datadogApiKey = process.env.DATADOG_API_KEY;
 export const datadogSite = process.env.DATADOG_SITE ?? "datadoghq.com";

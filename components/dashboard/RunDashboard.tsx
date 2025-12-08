@@ -359,7 +359,7 @@ export function RunDashboard({ initialRuns, initialSettings }: Props) {
           <p>
             POST results to <code className="text-slate-100">/api/runs</code>, subscribe to <code className="text-slate-100">/api/events</code>
             for live updates, or import the `publishRun` helper. Configure storage/telemetry via env vars like
-            <code className="text-slate-100">PLAYWRIGHT_HUB_STORAGE</code> and <code className="text-slate-100">PLAYWRIGHT_HUB_TELEMETRY</code>.
+            <code className="text-slate-100">UXQA_STORAGE</code> and <code className="text-slate-100">UXQA_TELEMETRY</code>.
           </p>
         </div>
         <div className="flex flex-wrap gap-3 text-xs items-center">
@@ -370,7 +370,7 @@ export function RunDashboard({ initialRuns, initialSettings }: Props) {
             Stream live events
           </Link>
           <Link
-            href="https://github.com/phd-systems/call-centre-v2/tree/master/playwright-hub"
+            href="https://github.com/adentic/ux.qa"
             target="_blank"
             rel="noreferrer"
             className="px-3 py-1 rounded-full border border-slate-700 text-slate-200 hover:text-white"

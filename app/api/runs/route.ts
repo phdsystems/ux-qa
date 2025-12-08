@@ -37,7 +37,7 @@ export async function GET(request: Request) {
   }
   const runs = await listRuns();
   return NextResponse.json({ runs }, {
-    headers: apiKey ? { "x-playwright-hub-key-required": "true" } : undefined
+    headers: apiKey ? { "x-uxqa-key-required": "true" } : undefined
   });
 }
 

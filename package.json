@@ -1,8 +1,11 @@
 {
-  "name": "playwright-hub",
+  "name": "ux.qa",
   "version": "0.1.0",
   "private": true,
   "packageManager": "bun@1.3.4",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "postinstall": "playwright install",
     "dev": "next dev",

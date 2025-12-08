@@ -8,7 +8,7 @@ import { ensureAuthorized, hasRole } from "@/lib/auth";
 const AUTH_OK = "ok";
 
 async function getDoc(slug: string) {
-  const filePath = path.join(process.cwd(), "playwright-hub", "content", "help", `${slug}.md`);
+  const filePath = path.join(process.cwd(), "content", "help", `${slug}.md`);
   try {
     const raw = await fs.readFile(filePath, "utf-8");
     return raw;
@@ -21,7 +21,7 @@ async function getDoc(slug: string) {
 }
 
 async function allowed(slug: string, role: string | null | undefined) {
-  const indexPath = path.join(process.cwd(), "playwright-hub", "content", "help", "index.json");
+  const indexPath = path.join(process.cwd(), "content", "help", "index.json");
   const entries = JSON.parse(await fs.readFile(indexPath, "utf-8")) as Array<{ slug: string; roles?: string[] }>;
   const entry = entries.find((item) => item.slug === slug);
   if (!entry) {

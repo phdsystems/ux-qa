@@ -6,7 +6,7 @@ import { ensureAuthorized, hasRole } from "@/lib/auth";
 const AUTH_OK = "ok";
 
 async function getArticles(role: string | null | undefined) {
-  const indexPath = path.join(process.cwd(), "playwright-hub", "content", "help", "index.json");
+  const indexPath = path.join(process.cwd(), "content", "help", "index.json");
   const raw = await fs.readFile(indexPath, "utf-8");
   const entries = JSON.parse(raw) as Array<{ slug: string; title: string; roles?: string[] }>;
   return entries.filter((entry) => hasRole(role, entry.roles ?? []));
@@ -22,7 +22,7 @@ export default async function HelpCenterPage() {
     <div className="space-y-4">
       <header className="bg-slate-900/40 border border-slate-800 rounded-2xl p-5">
         <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Help Center</p>
-        <h1 className="text-3xl font-semibold">Playwright Hub Knowledge Base</h1>
+        <h1 className="text-3xl font-semibold">UX.QA Knowledge Base</h1>
         <p className="text-sm text-slate-400">Browse articles, templates, and integration guides.</p>
       </header>
       <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
