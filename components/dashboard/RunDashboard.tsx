@@ -370,7 +370,7 @@ export function RunDashboard({ initialRuns, initialSettings }: Props) {
             Stream live events
           </Link>
           <Link
-            href="https://github.com/phdsystems/ux.qa"
+            href="https://github.com/phdsystems/ux-qa"
             target="_blank"
             rel="noreferrer"
             className="px-3 py-1 rounded-full border border-slate-700 text-slate-200 hover:text-white"

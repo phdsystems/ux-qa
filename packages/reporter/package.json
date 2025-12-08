@@ -42,7 +42,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/phdsystems/ux.qa.git",
+    "url": "https://github.com/phdsystems/ux-qa.git",
     "directory": "packages/reporter"
   }
 }

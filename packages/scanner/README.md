@@ -197,7 +197,7 @@ test.describe('LoginForm', () => {
 
 ## Integration with UX.QA
 
-Results can be published to [UX.QA](https://github.com/phdsystems/ux.qa) dashboard:
+Results can be published to [UX.QA](https://github.com/phdsystems/ux-qa) dashboard:
 
 ```bash
 # Run scan and publish results
