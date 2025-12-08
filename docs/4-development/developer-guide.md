@@ -28,7 +28,7 @@
 
 ```bash
 # 1. Start Dashboard
-git clone https://github.com/adentic/ux.qa.git
+git clone https://github.com/phdsystems/ux.qa.git
 cd ux.qa
 bun install
 bun run dev
@@ -51,7 +51,7 @@ For developing or testing packages locally before npm publish:
 
 ```bash
 # 1. Clone and build packages
-git clone https://github.com/adentic/ux.qa.git
+git clone https://github.com/phdsystems/ux.qa.git
 cd ux.qa
 bun install
 
@@ -88,7 +88,7 @@ In your project's `package.json`:
 
 ```bash
 # Clone and install
-git clone https://github.com/adentic/ux.qa.git
+git clone https://github.com/phdsystems/ux.qa.git
 cd ux.qa
 bun install
 
@@ -599,6 +599,6 @@ DEBUG=uxqa:* uxqa-scan ./src
 
 ### Getting Help
 
-- [GitHub Issues](https://github.com/adentic/ux.qa/issues)
+- [GitHub Issues](https://github.com/phdsystems/ux.qa/issues)
 - [Architecture Docs](../3-design/architecture.md)
 - [API Reference](../3-design/api-reference.md)

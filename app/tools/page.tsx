@@ -79,7 +79,7 @@ export default function ToolsPage() {
 
           <div className="flex gap-3 pt-2">
             <a
-              href="https://github.com/adentic/ux.qa/tree/main/packages/scanner"
+              href="https://github.com/phdsystems/ux.qa/tree/main/packages/scanner"
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 text-center py-2 px-4 bg-slate-700 hover:bg-slate-600 rounded text-sm font-medium transition-colors"
