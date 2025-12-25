@@ -2,7 +2,7 @@
 
 ## Overview
 
-**FrontMock** includes **20+ reusable test components** that simplify common testing scenarios. These components eliminate boilerplate and provide consistent test setup across your test suite.
+**FrontMock** includes **25+ reusable test components** that simplify common testing scenarios. These components eliminate boilerplate and provide consistent test setup across your test suite.
 
 ```
 @ux.qa/frontmock/components/
@@ -639,6 +639,198 @@ cleanup()
 
 ---
 
+### setupMockGeolocation
+
+Mock Geolocation API for testing location-based features.
+
+```typescript
+import { setupMockGeolocation, LocationPresets } from '@ux.qa/frontmock'
+
+const { setPosition, triggerPosition, cleanup } = setupMockGeolocation()
+
+render(<MapComponent />)
+
+// Set position to San Francisco
+setPosition(LocationPresets.sanFrancisco)
+triggerPosition()
+
+// Verify map centered on position
+expect(screen.getByText(/San Francisco/i)).toBeInTheDocument()
+
+cleanup()
+```
+
+**Returns:**
+- `mockGetCurrentPosition` - Mock getCurrentPosition
+- `mockWatchPosition` - Mock watchPosition
+- `mockClearWatch` - Mock clearWatch
+- `setPosition(coords)` - Set current position
+- `triggerPosition(position?)` - Trigger position update
+- `triggerError(code, message)` - Trigger geolocation error
+- `getWatchCallbacks()` - Get active watch callbacks
+- `cleanup()` - Clean up mocks
+
+**Helpers:**
+- `LocationPresets` - Common locations (sanFrancisco, newYork, london, tokyo, etc.)
+- `GeolocationErrorCode` - Error code constants
+
+---
+
+### setupMockNetworkInformation
+
+Mock Network Information API and online/offline events.
+
+```typescript
+import { setupMockNetworkInformation, ConnectionPresets } from '@ux.qa/frontmock'
+
+const { setOnline, setConnectionType, cleanup } = setupMockNetworkInformation()
+
+render(<OfflineIndicator />)
+
+// Simulate going offline
+setOnline(false)
+expect(screen.getByText(/offline/i)).toBeInTheDocument()
+
+// Simulate slow connection
+setOnline(true)
+setConnectionType('slow-2g')
+expect(screen.getByText(/slow connection/i)).toBeInTheDocument()
+
+cleanup()
+```
+
+**Returns:**
+- `setOnline(online)` - Set online/offline status
+- `setConnectionType(type)` - Set connection type ('slow-2g', '2g', '3g', '4g')
+- `setConnectionSpeed(downlink, rtt)` - Set custom connection speed
+- `setSaveData(enabled)` - Set save data mode
+- `triggerOnline()` - Trigger online event
+- `triggerOffline()` - Trigger offline event
+- `triggerConnectionChange()` - Trigger connection change event
+- `cleanup()` - Clean up mocks
+
+**Helpers:**
+- `ConnectionPresets` - Connection presets (offline, slow2g, 2g, 3g, 4g, wifi)
+
+---
+
+### setupMockPageVisibility
+
+Mock Page Visibility API for testing tab switching.
+
+```typescript
+import { setupMockPageVisibility } from '@ux.qa/frontmock'
+
+const { setVisible, cleanup } = setupMockPageVisibility()
+
+render(<VideoPlayer />)
+
+// Start video
+await user.click(screen.getByRole('button', { name: /play/i }))
+expect(screen.getByTestId('video')).toHaveAttribute('data-playing', 'true')
+
+// Simulate tab hidden (should pause video)
+setVisible(false)
+expect(screen.getByTestId('video')).toHaveAttribute('data-playing', 'false')
+
+// Simulate tab visible again
+setVisible(true)
+
+cleanup()
+```
+
+**Returns:**
+- `setVisible(visible)` - Set page visibility
+- `triggerVisibilityChange(hidden?)` - Trigger visibility change event
+- `getVisibilityState()` - Get current visibility state
+- `cleanup()` - Clean up mocks
+
+---
+
+### setupMockMediaDevices
+
+Mock MediaDevices API for testing camera and microphone.
+
+```typescript
+import { setupMockMediaDevices, MediaConstraintPresets } from '@ux.qa/frontmock'
+
+const { mockGetUserMedia, createMockStream, cleanup } = setupMockMediaDevices()
+
+render(<VideoCallComponent />)
+
+// User clicks "start video"
+await user.click(screen.getByRole('button', { name: /start video/i }))
+
+// Verify getUserMedia was called
+expect(mockGetUserMedia).toHaveBeenCalledWith({
+  video: true,
+  audio: true
+})
+
+// Simulate stream
+const stream = createMockStream(true, true)
+
+cleanup()
+```
+
+**Returns:**
+- `mockGetUserMedia` - Mock getUserMedia function
+- `mockGetDisplayMedia` - Mock getDisplayMedia (screen sharing)
+- `mockEnumerateDevices` - Mock enumerateDevices
+- `createMockStream(audio, video)` - Create mock MediaStream
+- `triggerDeviceChange()` - Trigger device change event
+- `setPermission(type, state)` - Set permission state
+- `cleanup()` - Clean up mocks
+
+**Helpers:**
+- `MediaConstraintPresets` - Common constraints (videoOnly, audioOnly, hd, fullHd, etc.)
+
+---
+
+### setupMockMutationObserver
+
+Mock MutationObserver API for testing DOM change watchers.
+
+```typescript
+import { setupMockMutationObserver, MutationHelpers } from '@ux.qa/frontmock'
+
+const { mockObserve, triggerMutation, cleanup } = setupMockMutationObserver()
+
+render(<DOMWatcher />)
+
+const target = screen.getByTestId('watched-element')
+
+// Verify observer was set up
+expect(mockObserve).toHaveBeenCalledWith(
+  target,
+  expect.objectContaining({ attributes: true })
+)
+
+// Trigger attribute change
+triggerMutation(
+  MutationHelpers.classChange(target, 'old-class')
+)
+
+// Verify component reacted to mutation
+expect(screen.getByText(/class changed/i)).toBeInTheDocument()
+
+cleanup()
+```
+
+**Returns:**
+- `mockObserve` - Mock observe function
+- `mockDisconnect` - Mock disconnect function
+- `mockTakeRecords` - Mock takeRecords function
+- `triggerMutation(record)` - Trigger single mutation
+- `triggerMutations(records)` - Trigger multiple mutations
+- `getObservedTargets()` - Get observed elements
+- `cleanup()` - Clean up mocks
+
+**Helpers:**
+- `MutationHelpers` - Helpers for creating mutations (attributeChange, classChange, childAdded, etc.)
+
+---
+
 ## Helper Components
 
 ### TestBoundary
@@ -797,6 +989,11 @@ import {
   setupMockClipboard,
   setupMockWebSocket,
   setupMockAnimationFrame,
+  setupMockGeolocation,
+  setupMockNetworkInformation,
+  setupMockPageVisibility,
+  setupMockMediaDevices,
+  setupMockMutationObserver,
 
   // Helpers
   TestBoundary,
@@ -906,10 +1103,10 @@ describe('UserDashboard with test components', () => {
 |----------|------------|----------|
 | **Providers** | `AllProviders`, `ThemeProvider`, `RouterProvider` | Provide context for tests |
 | **Component Mocks** | `MockImage`, `MockVideo`, `MockAudio`, `MockPortal`, `MockCanvas` | Mock media and graphics |
-| **Browser API Mocks** | `MockIntersectionObserver`, `MockResizeObserver`, `MockMatchMedia`, `MockLocalStorage`, `MockSessionStorage`, `MockFileReader`, `MockClipboard`, `MockWebSocket`, `MockAnimationFrame` | Mock browser APIs |
+| **Browser API Mocks** | `MockIntersectionObserver`, `MockResizeObserver`, `MockMatchMedia`, `MockLocalStorage`, `MockSessionStorage`, `MockFileReader`, `MockClipboard`, `MockWebSocket`, `MockAnimationFrame`, `MockGeolocation`, `MockNetworkInformation`, `MockPageVisibility`, `MockMediaDevices`, `MockMutationObserver` | Mock browser APIs |
 | **Helpers** | `TestBoundary`, `TestHarness`, `renderWithProviders`, `useTestUpdate`, `useRenderCount` | Test setup utilities |
 
-**Total: 20+ reusable test components** ✅
+**Total: 25+ reusable test components** ✅
 
 All available via:
 ```typescript
