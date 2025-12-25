@@ -15,6 +15,7 @@ export interface MockVideoProps {
   autoPlay?: boolean
   loop?: boolean
   muted?: boolean
+  duration?: number
   onLoadedMetadata?: () => void
   onPlay?: () => void
   onPause?: () => void
@@ -58,6 +59,7 @@ export function MockVideo({
   autoPlay = false,
   loop = false,
   muted = false,
+  duration: propDuration = 100,
   onLoadedMetadata,
   onPlay,
   onPause,
@@ -68,7 +70,7 @@ export function MockVideo({
 }: MockVideoProps) {
   const [isPlaying, setIsPlaying] = useState(autoPlay)
   const [currentTime, setCurrentTime] = useState(0)
-  const duration = 100 // Mock duration in seconds
+  const duration = propDuration
 
   React.useEffect(() => {
     // Simulate video metadata loaded
@@ -125,6 +127,9 @@ export function MockVideo({
       {...props}
       data-testid="mock-video"
       data-src={src}
+      data-poster={poster}
+      data-loop={loop ? 'true' : undefined}
+      data-muted={muted ? 'true' : undefined}
       data-playing={isPlaying}
       data-current-time={currentTime}
       data-duration={duration}

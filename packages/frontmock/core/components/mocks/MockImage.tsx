@@ -11,6 +11,10 @@ export interface MockImageProps {
   alt: string
   width?: number | string
   height?: number | string
+  loading?: 'lazy' | 'eager'
+  srcSet?: string
+  sizes?: string
+  simulateError?: boolean
   onLoad?: () => void
   onError?: (error: Error) => void
   [key: string]: any
@@ -36,18 +40,25 @@ export function MockImage({
   alt,
   width,
   height,
+  loading,
+  srcSet,
+  sizes,
+  simulateError = false,
   onLoad,
   onError,
   ...props
 }: MockImageProps) {
   React.useEffect(() => {
-    // Simulate successful image load
     const timer = setTimeout(() => {
-      onLoad?.()
+      if (simulateError) {
+        onError?.(new Error('Failed to load image'))
+      } else {
+        onLoad?.()
+      }
     }, 0)
 
     return () => clearTimeout(timer)
-  }, [onLoad])
+  }, [onLoad, onError, simulateError])
 
   return (
     <div
@@ -56,6 +67,10 @@ export function MockImage({
       aria-label={alt}
       data-testid="mock-image"
       data-src={src}
+      data-alt={alt}
+      data-loading={loading}
+      data-srcset={srcSet}
+      data-sizes={sizes}
       style={{
         width: width || 'auto',
         height: height || 'auto',

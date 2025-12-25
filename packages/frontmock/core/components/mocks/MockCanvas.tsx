@@ -4,6 +4,8 @@
  * Tracks canvas operations without actual rendering
  */
 
+import React from 'react'
+
 export interface CanvasOperation {
   method: string
   args: any[]

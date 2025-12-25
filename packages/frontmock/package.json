@@ -1,19 +1,23 @@
 {
-  "name": "@ux.qa/frontmock-workspace",
+  "name": "@ux.qa/frontmock",
   "version": "0.1.0",
   "description": "FrontMock - Modern frontend testing framework with 20+ reusable test components",
-  "private": true,
-  "workspaces": [
-    "core",
-    "cli",
-    "config"
-  ],
+  "main": "index.ts",
+  "types": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./spi": "./spi/index.ts",
+    "./api": "./api/index.ts",
+    "./core": "./core/index.ts"
+  },
   "scripts": {
-    "build": "bun run build:core && bun run build:cli",
-    "build:core": "cd core && bun run build",
-    "build:cli": "cd cli && bun run build",
-    "test": "bun test",
-    "dev": "bun run build --watch"
+    "test": "cd examples && npx vitest run",
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "vitest": "^2.0.0 || ^3.0.0 || ^4.0.0"
   },
   "keywords": [
     "frontmock",
